@@ -18,14 +18,14 @@
 <header>
     <nav>
         {% if current_user.is_authenticated %}
-    <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
-{% else %}
-    <p>
-        <a class="btn btn-primary " href="/register">Зарегистрироваться</a>
-        <a class="btn btn-success" href="/login">Войти</a>
+        <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
         <a class="btn btn-primary " href="/job">Добавить работу</a>
-    </p>
-{% endif %}
+        {% else %}
+        <p>
+            <a class="btn btn-success" href="/login">Войти</a>
+            <a class="btn btn-primary " href="/register">Зарегистрироваться</a>
+        </p>
+        {% endif %}
     </nav>
 </header>
 <!-- Begin page content -->

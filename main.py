@@ -1,13 +1,12 @@
-from flask_login import LoginManager, login_user, login_required, logout_user
 from flask import Flask, render_template, redirect
-from forms.loginform import LoginForm
-from data import db_session
-from data.users import User
-from data.jobs import Jobs
-from data.news import News
-from forms.registerform import RegisterForm
-from forms.jobform import JobForm
+from flask_login import LoginManager, login_user, login_required, logout_user
 
+from data import db_session
+from data.jobs import Jobs
+from data.users import User
+from forms.jobform import JobForm
+from forms.loginform import LoginForm
+from forms.registerform import RegisterForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -49,7 +48,7 @@ def logout():
 def index():
     db_sess = db_session.create_session()
     jobs = db_sess.query(Jobs)
-    return render_template("index.html", jobs=jobs)
+    return render_template("index.html", title="Work log", jobs=jobs)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -90,7 +89,8 @@ def add_job():
             job=form.job.data,
             collaborators=form.collaborators.data,
             is_finished=form.is_finished.data,
-            work_size=form.work_size.data
+            work_size=form.work_size.data,
+            team_leader=form.team_leader.data
         )
         db_sess.add(job)
         db_sess.commit()
